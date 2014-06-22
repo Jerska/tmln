@@ -1,0 +1,45 @@
+<html ng-app="app">
+  <head>
+    <title>Search engine</title>
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+    <script type="text/javascript" src="jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="angular/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <div class="container" ng-controller="Ctrl" ng-init="init()">
+    <h1 class="text-center">Search engine</h1>
+    <div class="jumbotron">
+      <p>These commands should be enough to test all functionnalities.</p>
+      <table class="table table-striped">
+        <tr><th>Simple word</th><td><kbd>strong</kbd></td></tr>
+        <tr><th>Multiple words</th><td><kbd>strong &amp;&amp; long</kbd></td></tr>
+        <tr><th>Mixed conditions</th><td><kbd>!(and || or || for || "i am" || you || is)</kbd></td></tr>
+        <tr><th>Strict mode</th><td><kbd>"my name is"</kbd></td></tr>
+        <tr><th>Let's play</th><td><kbd>"sylvain utard"</kbd> =&gt; no result</td></tr>
+        <tr><th>New generation</th><td><a style="cursor: pointer;" ng-click="index_test()">Index folder <kbd>test</kbd> <em>{{ index_test_result }}</em></a></td></tr>
+        <tr><th>Let's play 2</th><td><kbd>"sylvain utard"</kbd> =&gt; 1 result (<kbd>test/test.txt</kbd>)</td></tr>
+        <tr><th>Delete this file</th><td><a style="cursor: pointer;" ng-click="delete_test()">Delete file <kbd>test/test.txt</kbd> <em>{{ delete_test_result }}</em></td></tr>
+        <tr><th>Let's play 3</th><td><kbd>"sylvain utard"</kbd> =&gt; no result</td></tr>
+      </table>
+      <p>Be careful, there is no limit to the sent data, so you might wait a lot on usual queries (i.e. <kbd>for</kbd>).</p>
+      <p>Also, <kbd>a b</kbd> will fail on the parser, be sure to to either <kbd>"a b"</kbd> or <kbd>a &amp;&amp; b</kbd> ! (Demos don't need defensive programming !)</p>
+    </div>
+    <form role="form">
+      <div class="form-group">
+        <input class="form-control" type="text" ng-model="query" />
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary" ng-click="submit()">Search !</button>
+      </div>
+    </form>
+    <div class="jumbotron">
+      <ul>
+        <li ng-repeat="result in results">{{ result.path }}
+          <ul>
+            <li ng-repeat="(key, val) in result.meta"><strong>{{ key }}</strong>: {{ val }}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</html>
