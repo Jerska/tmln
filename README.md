@@ -34,6 +34,7 @@ Demonstration of handling in *strict* mode (`"..."`).
 
 Not in the subject anymore, but handling of an AST as the input of our search function.
 
+```
 {
   foo: [1, 2],
   bar: [1, 3]
@@ -47,3 +48,4 @@ gen | 1 | 2 | 1 |
 foo[gen1] \doc{gen != 1}
 U
 foo[gen2] \doc{gen != 2}
+```
